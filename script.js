@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         123盘去广告
-// @namespace    https://github.com/CreeperDisco
+// @namespace    https://github.com/CreeperDisco/pan123-remove-ad
 // @version      1.0
 // @description  去除123盘背景广告、广告跳转、及广告横幅，添加了150%的缩放，窗口宽度自适应
 // @author       CreeperDisco
