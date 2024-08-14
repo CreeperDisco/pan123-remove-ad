@@ -6,8 +6,8 @@
 // @author       CreeperDisco
 // @license      GPL-3.0-only
 // @copyright    2024, CreeperDisco
-// @downloadURL  https://raw.githubusercontent.com/CreeperDisco/pan123-remove-ad/main/script.js
-// @updateURL    https://raw.githubusercontent.com/CreeperDisco/pan123-remove-ad/main/script.js
+// @downloadURL  https://update.greasyfork.org/scripts/503621/123%E7%9B%98%E5%8E%BB%E5%B9%BF%E5%91%8A.user.js
+// @updateURL    https://update.greasyfork.org/scripts/503621/123%E7%9B%98%E5%8E%BB%E5%B9%BF%E5%91%8A.user.js
 // @match        https://www.123pan.com/s/*
 // @icon         https://statics.123957.com/static-by-custom/favicon.ico
 // @grant        none
