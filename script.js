@@ -5,7 +5,6 @@
 // @description  去除123盘背景广告、广告跳转、及广告横幅，添加了150%的缩放，窗口宽度自适应
 // @author       CreeperDisco
 // @downloadURL  https://raw.githubusercontent.com/CreeperDisco/pan123-remove-ad/main/script.js
-// @downloadURL  https://gitee.com/ice-flame/pan123-remove-ad/raw/main/script.js
 // @updateURL    https://raw.githubusercontent.com/CreeperDisco/pan123-remove-ad/main/script.js
 // @match        https://www.123pan.com/s/*
 // @icon         https://statics.123957.com/static-by-custom/favicon.ico
