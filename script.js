@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         123盘去广告
 // @namespace    https://github.com/CreeperDisco/pan123-remove-ad
-// @version      1.2.0
+// @version      1.3.0
 // @description  去除123盘背景广告、广告跳转、及广告横幅，屏蔽客户端下载和手机扫描，添加了150%的缩放，窗口宽度自适应
 // @author       CreeperDisco
 // @license      GPL-3.0-only
@@ -46,6 +46,57 @@
             // 如果没有找到，等待一段时间后再次检查
             setTimeout(checkForContentBorder, 100); // 每0.1秒检查一次
         }
+    }
+
+    function shareExpired() {
+        // 移动div的函数
+        function moveDivs() {
+            // 查找具有类名"webbody svip-body"的源div
+            var sourceDiv = document.querySelector('.webbody.svip-body');
+
+            if (sourceDiv) {
+                // 查找源div的所有一级子div
+                var childDivs = sourceDiv.querySelectorAll(':scope > div');
+
+                // 查找具有类名"appdiv web-wrap"的目标div
+                var targetDiv = document.querySelector('.appdiv.web-wrap');
+
+                if (targetDiv) {
+                    // 遍历每个一级子div并将其移动到目标div
+                    for (var i = 0; i < childDivs.length; i++) {
+                        // 将一级子div附加到目标div
+                        targetDiv.appendChild(childDivs[i]);
+                    }
+                }
+            }
+            removeAd();
+        }
+
+        function removeAd() {
+
+            // 获取所有需要移除的webbody svip-body（移除 背景广告）
+            let elements = document.querySelectorAll('div.webbody.svip-body');
+            // 移除它
+            elements.forEach(element => {
+                element.parentNode.removeChild(element);
+            });
+        }
+
+        // 创建一个MutationObserver实例
+        var observer = new MutationObserver(moveDivs);
+
+        // 配置MutationObserver，观察整个DOM树的变化
+        var config = {
+            childList: true,
+            subtree: true
+        };
+
+        // 开始观察document.body的变化
+        observer.observe(document.body, config);
+
+        // 在DOMContentLoaded事件中尝试移动div
+        document.addEventListener('DOMContentLoaded', moveDivs);
+
     }
 
     // 定义 leftCard 函数（beta）
@@ -186,7 +237,7 @@
 
     // 新建 phoneWeb 函数
     function phoneWeb() {
-        isPhone();//目前没做代码，先这样吧
+        isPhone(); //目前没做代码，先这样吧
     }
 
     function isPhone() {
@@ -211,14 +262,24 @@
             return false; // 不是移动设备
         }
 
+        // 检查页面中是否存在“分享已过期”字样，并调用 shareExpired 函数
+        var expiredText = document.body.innerHTML.indexOf('分享已过期') !== -1;
+
         // 检测设备类型并执行相应函数
         if (isMobileDevice()) {
             phoneWeb(); // 如果是移动设备，执行phoneWeb函数
         } else {
             console.log('您的网页是PC端');
 
-            // 开始检查是否有contentBorder
-            checkForContentBorder();
+            if (expiredText) {
+                console.log('分享已过期');
+
+                // 如果存在“分享已过期”，调用 shareExpired 函数
+                shareExpired();
+            } else {
+                // 开始检查是否有contentBorder
+                checkForContentBorder();
+            }
         }
     };
 
